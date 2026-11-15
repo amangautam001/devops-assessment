@@ -1,0 +1,1 @@
+uid=1000(aman_gautam) gid=1000(aman_gautam) groups=1000(aman_gautam),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users)

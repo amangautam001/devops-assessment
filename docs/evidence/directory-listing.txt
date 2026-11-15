@@ -1,0 +1,7 @@
+total 24
+drwxr-xr-x 6 aman_gautam aman_gautam 4096 Nov 14 16:21 .
+drwxr-x--- 4 aman_gautam aman_gautam 4096 Nov 14 16:17 ..
+drwxr-xr-x 2 aman_gautam aman_gautam 4096 Nov 14 16:21 app
+drwxr-xr-x 3 aman_gautam aman_gautam 4096 Nov 14 17:02 docs
+drwxr-xr-x 2 aman_gautam aman_gautam 4096 Nov 14 16:21 nginx
+drwxr-xr-x 2 aman_gautam aman_gautam 4096 Nov 14 16:21 scripts

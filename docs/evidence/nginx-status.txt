@@ -1,0 +1,27 @@
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: active (running) since Sat 2026-11-14 16:43:40 UTC; 19min ago
+       Docs: man:nginx(8)
+    Process: 1232 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 1234 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 1346 ExecReload=/usr/sbin/nginx -g daemon on; master_process on; -s reload (code=exited, status=0/SUCCESS)
+   Main PID: 1235 (nginx)
+      Tasks: 9 (limit: 9345)
+     Memory: 6.9M (peak: 14.0M)
+        CPU: 132ms
+     CGroup: /system.slice/nginx.service
+             ├─1235 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
+             ├─1348 "nginx: worker process"
+             ├─1349 "nginx: worker process"
+             ├─1350 "nginx: worker process"
+             ├─1351 "nginx: worker process"
+             ├─1352 "nginx: worker process"
+             ├─1353 "nginx: worker process"
+             ├─1354 "nginx: worker process"
+             └─1355 "nginx: worker process"
+
+Nov 14 16:43:40 LAPTOP-QO1B75FH systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Nov 14 16:43:40 LAPTOP-QO1B75FH systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Nov 14 16:54:23 LAPTOP-QO1B75FH systemd[1]: Reloading nginx.service - A high performance web server and a reverse proxy server...
+Nov 14 16:54:23 LAPTOP-QO1B75FH nginx[1346]: 2026/11/14 16:54:23 [notice] 1346#1346: signal process started
+Nov 14 16:54:23 LAPTOP-QO1B75FH systemd[1]: Reloaded nginx.service - A high performance web server and a reverse proxy server.
