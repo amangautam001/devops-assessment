@@ -1,0 +1,14 @@
+PostgreSQL Backup and Restore Verification
+
+1. Created backup using pg_dump.
+2. Backup file: /tmp/studentdb-backup.sql
+3. Backup size: 2.1 KB
+4. Created separate database: studentdb_restore_test
+5. Restored backup using psql with ON_ERROR_STOP=1.
+6. Verified restored student record:
+
+id | name
+1  | Aman Gautam
+
+Result: Backup and restore verification successful.
+Original studentdb database was not modified during the restore test.
