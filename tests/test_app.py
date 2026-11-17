@@ -7,6 +7,8 @@ def test_home_endpoint():
     response = client.get("/")
 
     assert response.status_code == 200
+
+    # Intentional wrong value for CI failure demonstration
     assert response.json["message"] == "Student Management API is running"
 
 
