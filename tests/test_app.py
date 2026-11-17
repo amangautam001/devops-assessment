@@ -9,7 +9,7 @@ def test_home_endpoint():
     assert response.status_code == 200
 
     # Intentional wrong value for CI failure demonstration
-    assert response.json["message"] == "Wrong message"
+    assert response.json["message"] == "Student Management API is running"
 
 
 def test_add_student_without_name():
