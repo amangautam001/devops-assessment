@@ -23,12 +23,33 @@ The project uses Flask, PostgreSQL, Nginx, Docker Compose and GitHub Actions.
 Client → Nginx → Flask API → PostgreSQL
 
 Services:
-- Nginx: Reverse proxy, exposed on port 8080.
+- Nginx: Reverse proxy, bound to 127.0.0.1:8080 (local machine only).
 - Flask: Student Management API, internal port 5000.
 - PostgreSQL: Database, internal port 5432.
 - Docker Volume: Persistent database storage.
 
 The database port is not published to the host.
+
+             Local Client
+                  |
+                  v
+          localhost:8080
+                  |
+                  v
+             Nginx
+          (127.0.0.1:8080)
+                  |
+                  v
+             Flask API
+              :5000
+                  |
+                  v
+           PostgreSQL
+              :5432
+                  |
+                  v
+          postgres_data
+          (Docker Volume)
 
 ## Project Structure
 
@@ -40,6 +61,14 @@ The database port is not published to the host.
 - .github/workflows/: GitHub Actions CI pipeline
 - docker-compose.yml: Multi-container configuration
 - .env.example: Environment configuration template
+
+## Prerequisites
+
+- Windows 11 with WSL2 and Ubuntu 24.04, or an equivalent Ubuntu environment.
+- Docker Engine with Docker Compose plugin.
+- Git.
+- Python 3.12 for running tests locally.
+- curl for API validation.
 
 ## Setup
 
@@ -123,16 +152,35 @@ The script reports the health-check time and result, returning exit code 0 on su
 
 ## Database Backup and Restore
 
-Create a logical backup:
+PostgreSQL supports logical backups using `pg_dump`.
 
-    docker compose exec -T db sh -c 'pg_dump -U "$POSTGRES_USER" "$POSTGRES_DB"' > backup.sql
+### Create Backup
 
-Restore:
+    docker compose exec -T db sh -c 'pg_dump -U "$POSTGRES_USER" "$POSTGRES_DB"' > /tmp/studentdb-backup.sql
 
-    cat backup.sql | docker compose exec -T db sh -c 'psql -U "$POSTGRES_USER" "$POSTGRES_DB"'
+### Restore to a Test Database
 
-Backup and restore should be tested before production use. Do not commit backups containing real data.
+Create a temporary database:
 
+    docker compose exec db sh -c 'createdb -U "$POSTGRES_USER" studentdb_restore_test'
+
+Restore the backup:
+
+    cat /tmp/studentdb-backup.sql | docker compose exec -T db sh -c 'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" studentdb_restore_test'
+
+Verify restored records:
+
+    docker compose exec db sh -c 'psql -U "$POSTGRES_USER" -d studentdb_restore_test -c "SELECT id, name FROM students;"'
+
+Remove the temporary test database after verification:
+
+    docker compose exec db sh -c 'dropdb -U "$POSTGRES_USER" studentdb_restore_test'
+
+### Verification
+
+A local backup and restore test was performed using a temporary database. The restored student record was verified successfully, and the original database remained unchanged.
+
+**Note:** Keep backups secure and never commit database backups containing private or real customer data.
 ## Troubleshooting
 
 See `docs/TROUBLESHOOTING.md` for recorded issues, evidence, root causes and resolutions.
@@ -147,3 +195,17 @@ See `docs/TROUBLESHOOTING.md` for recorded issues, evidence, root causes and res
 ## AI Assistance Disclosure
 
 AI assistance was used for learning, troubleshooting and drafting parts of the project configuration and documentation. Commands and behavior were tested locally where stated. The author is responsible for understanding and explaining the implementation.
+
+## Shutdown
+
+Stop and remove application containers:
+
+    docker compose down
+
+This preserves the PostgreSQL named volume and existing database data.
+
+To start the environment again:
+
+    docker compose up -d
+
+Do not use `docker compose down -v` unless you intentionally want to delete the database volume and its stored data.

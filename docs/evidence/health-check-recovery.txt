@@ -1,0 +1,18 @@
+Bash Health Check Evidence
+Date: Tue Nov 17 11:34:11 UTC 2026
+
+=== Failed Health Check (Port 9999) ===
+Health Check Time: Tue Nov 17 11:34:11 UTC 2026
+Checking URL: http://localhost:9999/health
+curl: (7) Failed to connect to localhost port 9999 after 0 ms: Couldn't connect to server
+
+Application is UNHEALTHY
+Exit Code: 1
+
+=== Successful Recovery (Port 8080) ===
+Health Check Time: Tue Nov 17 11:34:11 UTC 2026
+Checking URL: http://localhost:8080/health
+{"database":"connected","status":"healthy"}
+
+Application is HEALTHY
+Exit Code: 0

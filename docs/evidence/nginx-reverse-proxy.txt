@@ -1,0 +1,39 @@
+Nginx Reverse Proxy Evidence
+Date: Tue Nov 17 11:21:53 UTC 2026
+
+=== HTTP Response ===
+HTTP/1.1 200 OK
+Server: nginx/1.31.8
+Date: Tue, 17 Nov 2026 11:21:53 GMT
+Content-Type: application/json
+Content-Length: 44
+Connection: keep-alive
+
+{"database":"connected","status":"healthy"}
+
+=== Nginx Logs ===
+student-nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+student-nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+student-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+student-nginx  | 10-listen-on-ipv6-by-default.sh: info: can not modify /etc/nginx/conf.d/default.conf (read-only file system?)
+student-nginx  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+student-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+student-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+student-nginx  | /docker-entrypoint.sh: Configuration complete; ready for start up
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: using the "epoll" event method
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: nginx/1.31.8
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0)
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: OS: Linux 6.18.58.1-microsoft-standard-WSL2
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker processes
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker process 21
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker process 22
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker process 23
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker process 24
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker process 25
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker process 26
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker process 27
+student-nginx  | 2026/11/17 11:01:22 [notice] 1#1: start worker process 28
+student-nginx  | 172.18.0.1 - - [17/Nov/2026:11:04:02 +0000] "GET /health HTTP/1.1" 200 44 "-" "curl/8.5.0" "-"
+student-nginx  | 172.18.0.1 - - [17/Nov/2026:11:20:35 +0000] "GET /health HTTP/1.1" 200 44 "-" "curl/8.5.0" "-"
+student-nginx  | 172.18.0.1 - - [17/Nov/2026:11:21:53 +0000] "GET /health HTTP/1.1" 200 44 "-" "curl/8.5.0" "-"

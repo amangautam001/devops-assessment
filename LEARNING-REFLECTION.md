@@ -71,6 +71,19 @@ I want to improve my knowledge of:
 - Automated integration testing.
 - Production monitoring and deployment.
 
+## 6. Resources Used
+
+The following resources and tools were used during the assessment:
+
+- Official Docker documentation for Dockerfile and Docker Compose concepts.
+- Official Nginx documentation for reverse proxy configuration.
+- Official Flask documentation for API development.
+- Official PostgreSQL documentation for database operations and backups.
+- GitHub Actions documentation for CI workflow configuration.
+- Linux manual pages and terminal help for Linux commands.
+
+AI assistance was used to understand concepts, troubleshoot errors, review commands and improve documentation. I executed and verified the relevant commands in my local environment.
+
 ## 6. Conclusion
 
 This assessment provided practical exposure to several DevOps tools and workflows. It helped me understand how an application moves from local development to a containerized environment and how automated testing can detect problems before code is merged.
